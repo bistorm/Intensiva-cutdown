@@ -23,7 +23,7 @@ function añadir_id(id)
 {
 	var id_str = "";
 
-	if(id != undefined)
+	if(id != undefined &&id != "")
 	{
 		id_str = "id="+id;
 	}
@@ -47,12 +47,36 @@ function añadir_nombre(nombre)
 {
 	var nombre_str = "";
 
-	if(nombre != undefined)
+	if(nombre != undefined && nombre != "")
 	{
 		nombre_str = "name="+nombre;
 	}
 
 	return nombre_str;
+}
+
+function añadir_valor(valor)
+{
+	var valor_str = "";
+
+	if(valor != undefined && valor != "")
+	{
+		valor_str = "value="+valor;
+	}
+
+	return valor_str;
+}
+
+function añadir_etiqueta(etiqueta)
+{
+	var etiqueta_str = "";
+
+	if(etiqueta != undefined && etiqueta != "")
+	{
+		etiqueta_str = "label="+etiqueta;
+	}
+
+	return etiqueta_str;
 }
 
 function añadir_clases(clases)
@@ -332,7 +356,7 @@ function distribuir_botones(arr_botones)
 /////////////////////////////////////////////////////////////
 /////////////////// F O R M U L A R I O S ///////////////////
 /////////////////////////////////////////////////////////////
-
+/*
 var formulario = 
 {
 	tipo: "", //inline, horizontal
@@ -351,6 +375,28 @@ var componente_input =
 	input_prop: "",
 	tipo: "",
 }
+
+var componente_select =
+{
+	etiqueta: "",
+	id: "",
+	nombre: "",
+	clases: [],
+	prop: "",
+	multiple: false,
+	opciones: [],
+}
+
+var option_select =
+{
+	contenido: "",
+	id: "",
+	clases: [],
+	desactivado: false,
+	etiqueta: "",
+	seleccionado: false,
+	valor: "",
+}*/
 
 function crear_formulario(formulario)
 {
@@ -376,12 +422,13 @@ function crear_formulario(formulario)
 
 	for(i=0; i<this.componentes.length; i++)
 	{
-		switch(this.componentes[i].tipo)
+		/*switch(this.componentes[i].tipo)
 		{
 			case "file":
 				this.componentes_str += new crear_componente_input (this.componentes[i]).texto_html;
 			break;
-		}	
+		}*/	
+		this.componentes_str += formulario.componentes[i].texto_html;
 	}
 
 	this.texto_html = "<form class='"+this.clases_str+"' "+this.id_str+">";
@@ -414,6 +461,79 @@ function crear_componente_input(componente_input)
 	this.texto_html += "<div class='col-md-4'>";
 	this.texto_html += "<input "+this.input_id_str+" "+this.input_nombre_str+" class='"+this.input_clases_str+"' "+this.tipo_str+" "+this.input_prop+">";
 	this.texto_html += "</div> </div>";
+}
+
+function crear_componente_select(componente_select)
+{
+	this.etiqueta = componente_select.etiqueta;
+	this.id = componente_select.id;
+	this.nombre = componente_select.nombre;
+	this.clases = componente_select.clases || [];
+	this.prop = componente_select.prop || "";
+	this.multiple = componente_select.multiple || false;
+	this.opciones = componente_select.opciones || [];
+
+	this.id_str = añadir_id(this.id);
+	this.clases_str = añadir_clases_y_etiqueta(this.clases);
+	this.nombre_str = añadir_nombre(this.nombre);
+
+	this.texto_html = "<div class='form-group'>";
+
+	if(this.etiqueta != undefined && this.etiqueta != "")
+	{
+		this.texto_html += "<label class='col-md-4 control-label' for='"+this.id+"'>"+this.etiqueta+"</label>";
+		this.texto_html += "<div class='col-md-4'>";
+	}
+	else
+	{
+		this.texto_html += "<div>";
+	}
+
+	
+	this.texto_html += "<select "+this.id_str+" "+this.nombre_str+" "+this.clases_str+" "+this.prop+">";
+
+	if(this.opciones.length > 0)
+	{
+		for(var i = 0; i<this.opciones.length;i++)
+		{
+			this.texto_html += this.opciones[i].texto_html;
+		}
+	}
+
+	this.texto_html += "</select>";
+	this.texto_html += "</div> </div>";
+}
+
+function crear_opcion_select(opcion_select)
+{
+	this.contenido = opcion_select.contenido;
+	this.id = opcion_select.id;
+	this.clases = opcion_select.clases;
+	this.desactivado = opcion_select.desactivado || false;
+	this.etiqueta = opcion_select.etiqueta;
+	this.seleccionado = opcion_select.seleccionado || false;
+	this.valor = opcion_select.valor;
+
+	this.id_str = añadir_id(this.id);
+	this.clases_str = añadir_clases_y_etiqueta(this.clases);
+	this.etiqueta_str = añadir_etiqueta(this.etiqueta);
+	this.valor_str = añadir_valor(this.valor);
+
+
+	this.desactivado_str = "";
+	this.seleccionado_str = "";
+
+	if(this.desactivado == true)
+	{
+		this.desactivado_str = "disabled";
+	}
+
+	if(this.seleccionado == true)
+	{
+		this.seleccionado_str = "selected";
+	}
+
+	this.texto_html = "<option "+this.id_str+" "+this.clases_str+" "+this.etiqueta_str+" "+this.valor_str+" "+this.seleccionado_str+" "+this.desactivado_str+">"+this.contenido+"</option>";
 }
 
 /////////////////////////////////////////////////////////////
