@@ -79,7 +79,7 @@ function mostrar_panel_config()
 		tipo: "btn-default",	
 		tamano: "btn-sm",
 		contenido: "Cancelar",
-		//funcion: "",
+		funcion: "borrar_panel('panel_configuracion')",
 		activo: false,
 		desactivado: false,
 		bloqueado: false,
@@ -89,7 +89,7 @@ function mostrar_panel_config()
 		tipo: "btn-default",	
 		tamano: "btn-sm",
 		contenido: "Aceptar",
-		//funcion: "",
+		funcion: "borrar_panel('panel_configuracion')",
 		activo: false,
 		desactivado: false,
 		bloqueado: false,
@@ -99,23 +99,27 @@ function mostrar_panel_config()
 
 	//Opciones de configuración
 
-	var mes_1 = new crear_opcion_select({
-		contenido: "Enero",
-		valor: "1",
-	})
+	var arr_nombre_meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+	var arr_obj_meses = [];
+
+	for(var i = 0; i<arr_nombre_meses.length; i++)
+	{
+		var mes = new crear_opcion_select({
+			contenido: arr_nombre_meses[i],
+			valor: i,
+		});
+
+		arr_obj_meses.push(mes);
+	}
 
 	var seleccionar_mes = new crear_componente_select({
-		etiqueta: "",
-		id: "",
-		nombre: "",
-		clases: [],
-		prop: "",
-		multiple: false,
-		opciones: [mes_1],
-	})
+		etiqueta: "Mes",
+		id: "select_mes",
+		opciones: arr_obj_meses,
+	});
 
 	var formulario_configuracion = new crear_formulario({
-		tipo: "inline", //inline, horizontal
+		tipo: "horizontal", //inline, horizontal
 		componentes: [seleccionar_mes],
 	});
 
@@ -124,7 +128,8 @@ function mostrar_panel_config()
 	var panel = new crear_panel_flotante({
 		panel_tipo: "panel-primary",
 		cabecera: "Configuración",
-		contenido: formulario_configuracion.texto_html,
+		panel_id:"panel_configuracion",
+		contenido: "<p>Día de inicio de la jornada intensiva</p>"+formulario_configuracion.texto_html,
 		pie: botones_panel.texto_html,
 	});
 
