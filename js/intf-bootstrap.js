@@ -3,7 +3,7 @@
 /////////////////////// G E N E R A L ///////////////////////
 /////////////////////////////////////////////////////////////
 
-function de_array_a_string(arr)
+function inbo_de_array_a_string(arr)
 {
 	var str = "";
 	var i = 0;
@@ -19,7 +19,7 @@ function de_array_a_string(arr)
 	return str;
 }
 
-function añadir_id(id)
+function inbo_añadir_id(id)
 {
 	var id_str = "";
 
@@ -31,7 +31,7 @@ function añadir_id(id)
 	return id_str;
 }
 
-function añadir_tipo(tipo)
+function inbo_añadir_tipo(tipo)
 {
 	var tipo_str = "";
 
@@ -43,7 +43,7 @@ function añadir_tipo(tipo)
 	return tipo_str;
 }
 
-function añadir_nombre(nombre)
+function inbo_añadir_nombre(nombre)
 {
 	var nombre_str = "";
 
@@ -55,7 +55,7 @@ function añadir_nombre(nombre)
 	return nombre_str;
 }
 
-function añadir_valor(valor)
+function inbo_añadir_valor(valor)
 {
 	var valor_str = "";
 
@@ -67,7 +67,7 @@ function añadir_valor(valor)
 	return valor_str;
 }
 
-function añadir_etiqueta(etiqueta)
+function inbo_añadir_etiqueta(etiqueta)
 {
 	var etiqueta_str = "";
 
@@ -79,7 +79,7 @@ function añadir_etiqueta(etiqueta)
 	return etiqueta_str;
 }
 
-function añadir_clases(clases)
+function inbo_añadir_clases(clases)
 {
 	var clases_str = "";
 	var i = 0;
@@ -95,7 +95,7 @@ function añadir_clases(clases)
 	return clases_str;
 }
 
-function añadir_clases_y_etiqueta(clases)
+function inbo_añadir_clases_y_etiqueta(clases)
 {
 	var clases_str = "";
 	var i = 0;
@@ -112,7 +112,7 @@ function añadir_clases_y_etiqueta(clases)
 	return clases_str;
 }
 
-function añadir_evento_click(funcion)
+function inbo_añadir_evento_click(funcion)
 {
 	var str = "";
 
@@ -168,15 +168,15 @@ function crear_panel(panel)
 	this.pie_prop = panel.pie_prop || "";
 
 
-	this.panel_id_str = añadir_id(this.panel_id);
-	this.cabecera_id_str = añadir_id(this.cabecera_id);
-	this.contenido_id_str = añadir_id(this.contenido_id);
-	this.pie_id_str = añadir_id(this.pie_id);
+	this.panel_id_str = inbo_añadir_id(this.panel_id);
+	this.cabecera_id_str = inbo_añadir_id(this.cabecera_id);
+	this.contenido_id_str = inbo_añadir_id(this.contenido_id);
+	this.pie_id_str = inbo_añadir_id(this.pie_id);
 
-	this.panel_clases_str = añadir_clases(this.panel_clases);
-	this.cabecera_clases_str = añadir_clases(this.cabecera_clases);
-	this.contenido_clases_str = añadir_clases(this.contenido_clases);
-	this.pie_clases_str = añadir_clases(this.pie_clases);
+	this.panel_clases_str = inbo_añadir_clases(this.panel_clases);
+	this.cabecera_clases_str = inbo_añadir_clases(this.cabecera_clases);
+	this.contenido_clases_str = inbo_añadir_clases(this.contenido_clases);
+	this.pie_clases_str = inbo_añadir_clases(this.pie_clases);
 
 
 	this.texto_html = "<div class='panel "+this.panel_tipo+" "+this.panel_clases_str+"' "+this.panel_id_str+" "+this.panel_prop+">";
@@ -310,9 +310,9 @@ function crear_boton(boton)
 		this.clases.push(this.tamano);
 	}
 
-	this.id_str = añadir_id(this.id);
-	this.clases_str = añadir_clases(this.clases);
-	this.evento_click = añadir_evento_click(this.funcion);
+	this.id_str = inbo_añadir_id(this.id);
+	this.clases_str = inbo_añadir_clases(this.clases);
+	this.evento_click = inbo_añadir_evento_click(this.funcion);
 
 	this.texto_html = "<button type='button' class='btn"+this.clases_str+"' "+this.id_str+" "+this.evento_click+">"+this.contenido+"</button>";
 
@@ -415,8 +415,8 @@ function crear_formulario(formulario)
 		this.clases.push(this.tipo);
 	}
 
-	this.id_str = añadir_id(this.id);
-	this.clases_str = añadir_clases(this.clases);
+	this.id_str = inbo_añadir_id(this.id);
+	this.clases_str = inbo_añadir_clases(this.clases);
 
 	this.componentes_str = "";
 
@@ -448,10 +448,10 @@ function crear_componente_input(componente_input)
 	this.tipo = componente_input.tipo;
 	this.input_prop = componente_input.input_prop || "";
 
-	this.input_id_str = añadir_id(this.input_id);
-	this.input_clases_str = añadir_clases(this.input_clases);
-	this.input_nombre_str = añadir_nombre(this.input_nombre);
-	this.tipo_str = añadir_tipo(this.tipo);
+	this.input_id_str = inbo_añadir_id(this.input_id);
+	this.input_clases_str = inbo_añadir_clases(this.input_clases);
+	this.input_nombre_str = inbo_añadir_nombre(this.input_nombre);
+	this.tipo_str = inbo_añadir_tipo(this.tipo);
 
 	this.texto_html = "<div class='form-group'>";
 	if(this.etiqueta != undefined)
@@ -473,9 +473,9 @@ function crear_componente_select(componente_select)
 	this.multiple = componente_select.multiple || false;
 	this.opciones = componente_select.opciones || [];
 
-	this.id_str = añadir_id(this.id);
-	this.clases_str = añadir_clases_y_etiqueta(this.clases);
-	this.nombre_str = añadir_nombre(this.nombre);
+	this.id_str = inbo_añadir_id(this.id);
+	this.clases_str = inbo_añadir_clases_y_etiqueta(this.clases);
+	this.nombre_str = inbo_añadir_nombre(this.nombre);
 
 	this.texto_html = "<div class='form-group'>";
 
@@ -514,10 +514,10 @@ function crear_opcion_select(opcion_select)
 	this.seleccionado = opcion_select.seleccionado || false;
 	this.valor = opcion_select.valor;
 
-	this.id_str = añadir_id(this.id);
-	this.clases_str = añadir_clases_y_etiqueta(this.clases);
-	this.etiqueta_str = añadir_etiqueta(this.etiqueta);
-	this.valor_str = añadir_valor(this.valor);
+	this.id_str = inbo_añadir_id(this.id);
+	this.clases_str = inbo_añadir_clases_y_etiqueta(this.clases);
+	this.etiqueta_str = inbo_añadir_etiqueta(this.etiqueta);
+	this.valor_str = inbo_añadir_valor(this.valor);
 
 
 	this.desactivado_str = "";
@@ -574,13 +574,13 @@ function crear_tabla(tabla)
 	this.cabecera  = tabla.cabecera || "";
 	this.cuerpo = tabla.cuerpo || "";
 
-	this.tabla_id_str = añadir_id(this.tabla_id);
-	this.cabecera_id_str = añadir_id(this.cabecera_id);
-	this.cuerpo_id_str = añadir_id(this.cuerpo_id);
+	this.tabla_id_str = inbo_añadir_id(this.tabla_id);
+	this.cabecera_id_str = inbo_añadir_id(this.cabecera_id);
+	this.cuerpo_id_str = inbo_añadir_id(this.cuerpo_id);
 
-	this.tabla_clases_str = añadir_clases(this.tabla_clases);
-	this.cabecera_clases_str = añadir_clases_y_etiqueta(this.cabecera_clases);
-	this.cuerpo_clases_str = añadir_clases_y_etiqueta(this.cuerpo_clases);
+	this.tabla_clases_str = inbo_añadir_clases(this.tabla_clases);
+	this.cabecera_clases_str = inbo_añadir_clases_y_etiqueta(this.cabecera_clases);
+	this.cuerpo_clases_str = inbo_añadir_clases_y_etiqueta(this.cuerpo_clases);
 
 	this.texto_html = "<table "+this.tabla_id_str+" class='table "+this.tipo+" "+this.tabla_clases_str+"' "+this.tabla_prop+">";
 	this.texto_html += "<thead "+this.cabecera_id_str+" "+this.cabecera_clases_str+" "+this.cabecera_prop+">"+this.cabecera+"</thead>";
@@ -613,10 +613,10 @@ function crear_fila (fila)
 	this.prop = fila.prop || "";
 	this.columnas = fila.columnas || [];
 
-	this.id_str = añadir_id(this.id);
-	this.clases_str = añadir_clases_y_etiqueta(this.clases);
+	this.id_str = inbo_añadir_id(this.id);
+	this.clases_str = inbo_añadir_clases_y_etiqueta(this.clases);
 
-	this.columnas_str = de_array_a_string(this.columnas);
+	this.columnas_str = inbo_de_array_a_string(this.columnas);
 }
 
 function crear_celda (celda)
@@ -628,8 +628,8 @@ function crear_celda (celda)
 	this.prop = celda.prop  || "";
 	this.texto = celda.texto;
 
-	this.id_str = añadir_id(this.id);
-	this.clases_str = añadir_clases_y_etiqueta(this.clases);
+	this.id_str = inbo_añadir_id(this.id);
+	this.clases_str = inbo_añadir_clases_y_etiqueta(this.clases);
 
 	if(this.tipo === "cuerpo")
 	{
