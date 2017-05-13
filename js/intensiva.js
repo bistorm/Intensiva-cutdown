@@ -1,7 +1,11 @@
+
+var hora_inicio_intensiva = "14:30:00";
+var dia_inicio_intensiva = "June 16, 2017";
+
 $(document).ready(function(){
 	var intervalo = setInterval(function(){ 
 		var date_actual = new Date();
-		var date_intensiva = new Date("June 16, 2017 14:30:00");
+		var date_intensiva = new Date(dia_inicio_intensiva+" "+hora_inicio_intensiva);
 		var segundos_restantes = Math.round((date_intensiva.getTime() - date_actual.getTime())/1000);
 
 		$("#contador").html(segundos_restantes);
@@ -42,7 +46,7 @@ function mostrar_panel_error()
 		tipo: "btn-default",	
 		tamano: "btn-sm",
 		contenido: "Salir",
-		//funcion: "",
+		funcion: "borrar_panel('panel_error')",
 		activo: false,
 		desactivado: false,
 		bloqueado: false,
@@ -52,7 +56,7 @@ function mostrar_panel_error()
 		tipo: "btn-default",	
 		tamano: "btn-sm",
 		contenido: "Ignorar",
-		//funcion: "",
+		funcion: "borrar_panel('panel_error')",
 		activo: false,
 		desactivado: false,
 		bloqueado: false,
@@ -62,6 +66,7 @@ function mostrar_panel_error()
 
 	var panel = new crear_panel_flotante({
 		panel_tipo: "panel-danger",
+		panel_id:"panel_error",
 		cabecera: "ERROR",
 		contenido: "<p>Intensiva != NULL</p>",
 		pie: botones_panel.texto_html,
@@ -89,7 +94,7 @@ function mostrar_panel_config()
 		tipo: "btn-default",	
 		tamano: "btn-sm",
 		contenido: "Aceptar",
-		funcion: "borrar_panel('panel_configuracion')",
+		funcion: "cambiar_inicio_intensiva(),borrar_panel('panel_configuracion')",
 		activo: false,
 		desactivado: false,
 		bloqueado: false,
@@ -112,15 +117,25 @@ function mostrar_panel_config()
 		arr_obj_meses.push(mes);
 	}
 
-	var seleccionar_mes = new crear_componente_select({
-		etiqueta: "Mes",
-		id: "select_mes",
-		opciones: arr_obj_meses,
+	var seleccionar_dia = new crear_componente_input({
+		etiqueta: "Día",
+		etiqueta_final: " ",
+		input_id: "input_dia",
+		tipo: "date",
+		valor: "2017-06-16",
+	});
+
+	var seleccionar_hora = new crear_componente_input({
+		etiqueta: "Hora",
+		etiqueta_final: " ",
+		input_id: "input_hora",
+		tipo: "time",
+		valor: hora_inicio_intensiva,
 	});
 
 	var formulario_configuracion = new crear_formulario({
 		tipo: "horizontal", //inline, horizontal
-		componentes: [seleccionar_mes],
+		componentes: [seleccionar_dia, seleccionar_hora],
 	});
 
 	//Generación del panel
@@ -134,5 +149,11 @@ function mostrar_panel_config()
 	});
 
 	$("body").append(panel.texto_html);
+}
+
+function cambiar_inicio_intensiva ()
+{
+	hora_inicio_intensiva = $("#input_hora").val();
+	dia_inicio_intensiva = $("#input_dia").val();
 }
 
